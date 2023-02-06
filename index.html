@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>People Directory</h1>
+                <div id="directory">
+                    <table class="content-style" id="directoryTable">
+                        <thead>
+                            <tr>
+                                <th>Profile</th>
+                                <th>Registration Date</th>
+                                <th>Login</th>
+                                <th>Gender</th>
+                                <th>Age</th>
+                                <th>Date of Birth</th>
+                                <th>Nationality</th>
+                                <th>Current Address</th>
+                                <th>Contact Information</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    John Doe
+                                </td>
+                                <td>
+                                    Registration date
+                                </td>
+                                <td>
+                                    Login
+                                </td>
+                                <td>
+                                    Male
+                                </td>
+                                <td>
+                                    25
+                                </td>
+                                <td>
+                                    d.o.b.
+                                </td>
+                                <td>USA</td>
+                                <td>
+                                    Location, 
+                                    City, 
+                                    State, 
+                                    Country
+                                </td>
+                                <td>
+                                    <a href="555-555-5555">555-555-5555</a>
+                                    <a href="mailto:mrfancypants@cats.com">mrfancypants@cats.com</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+<script>
+    d3.csv("hr-directory.csv", function(data) {
+        console.log(data);
+    
+    //Appends the data from the CSV file to the table
+    let row = '<tr>';
+    row += '<td>' + data['nameFirst'] + ' ' + data['nameLast'] + '</b>' + '</td>';
+    row += '<td>' + data['registered.date'] + '</td>';
+    row += '<td>' + data['login.username'] + '</td>';
+    row += '<td>' + data['gender'] + '</td>';
+    row += '<td>' + data['dob.age'] + '</td>';
+    row += '<td>' + data['dob.date'] + '</td>';
+    row += '<td>' + data['nat'] + '</td>';
+    row += '<td>' + data['location.street.number'] + ' ' + data['location.street.name'] + '<br>' + data['city'] + ', ' + data['state'] + ' ' + data['location.postcode'] + '<br>' + data['country'] + '</td>';
+    row += '<td>' + '<a href="tel:' + data['phone'] + '">' + data['phone'] + '</a>' + '<br>' + '<a href="mailto:' + data['email'] + '">' + data['email'] + '</a>' + '</td>';
+
+    d3.select('#directoryTable').append('tr').html(row);
+
+    });
+
+</script>
+
+</html>
